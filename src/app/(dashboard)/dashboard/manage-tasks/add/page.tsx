@@ -12,6 +12,12 @@ import { useCreateTaskMutation } from "@/redux/features/tasks/tasksApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Create Task",
+};
+
 const CreateAdminPage = () => {
   const { data: session } = useSession();
   const role = (session as any)?.role;

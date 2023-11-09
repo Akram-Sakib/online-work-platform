@@ -10,6 +10,11 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Manage Orders",
+};
 
 const ManageOrdersPage = () => {
   const { data: session } = useSession();

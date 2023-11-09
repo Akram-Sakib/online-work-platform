@@ -14,7 +14,11 @@ import {
 } from "@/redux/features/profile/profileApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { Metadata } from "next/types";
 
+export const metadata: Metadata = {
+  title: "Dashboard Profile",
+};
 const AccountProfile = () => {
   const items = [
     {

@@ -10,6 +10,11 @@ import {
 } from "@/redux/features/categories/categoriesApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Edit Category",
+};
 
 type IEditAdminPageProps = {
   params: any;

@@ -8,6 +8,11 @@ import FormInput from "@/components/ui/FormInput";
 import { useAddCategoryMutation } from "@/redux/features/categories/categoriesApi";
 import toast from "react-hot-toast";
 import Button from "@/components/ui/Button";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Add Category",
+};
 
 const AddCategory = () => {
   const { data: session } = useSession();

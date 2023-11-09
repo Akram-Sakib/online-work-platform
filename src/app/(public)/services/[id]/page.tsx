@@ -9,6 +9,12 @@ import { useTaskQuery } from "@/redux/features/tasks/tasksApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Service Details",
+};
+
 const BuyerPage = ({
   params,
 }: {
@@ -48,7 +54,6 @@ const BuyerPage = ({
     taskReviews &&
     taskReviews?.length > 0 &&
     taskReviews?.some((review: any) => review.buyer.userId === userId);
-
 
   return (
     <section className="py-20">

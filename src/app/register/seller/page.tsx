@@ -7,7 +7,11 @@ import { useRegisterSellerMutation } from "@/redux/features/auth/authApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { Metadata } from "next/types";
 
+export const metadata: Metadata = {
+  title: "Register as Seller",
+};
 const RegisterPage = () => {
   const router = useRouter();
 

@@ -8,10 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import "./Navbar.css";
+import Button from "./Button";
 
 const Navbar = () => {
   const { data, isLoading } = useProfileQuery(undefined);
-  
+
   return (
     <Container>
       <div className="navbar bg-base-100">
@@ -43,6 +44,7 @@ const Navbar = () => {
               <li>
                 <Link href={"/contact-us"}>Contact Us</Link>
               </li>
+              {!isLoading && data?.name ? <li>Logout</li> : null}
             </ul>
           </div>
           <Link href={"/"}>
@@ -61,6 +63,9 @@ const Navbar = () => {
           </ul>
           {!isLoading && data?.name ? (
             <>
+              {!data.avatarUrl && data.name && (
+                <Button className="btn-xs text-xs">Logout</Button>
+              )}
               {data.avatarUrl && (
                 <details className="dropdown">
                   <summary className="m-1 ">

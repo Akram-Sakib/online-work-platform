@@ -9,6 +9,12 @@ import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Manage Buyers",
+};
+
 const ManageBuyersPage = () => {
   const { data: session } = useSession();
   const role = (session as any)?.role;

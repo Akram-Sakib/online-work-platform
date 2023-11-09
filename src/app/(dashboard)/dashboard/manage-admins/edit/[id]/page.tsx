@@ -16,13 +16,18 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import toast from "react-hot-toast";
 
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Edit Admin",
+};
+
 type IEditAdminPageProps = {
   params: any;
 };
 
 const EditAdminPage = ({ params }: IEditAdminPageProps) => {
   const { data: session } = useSession();
-  const role = (session as any)?.role;
   const items = [
     {
       name: "Dashboard",

@@ -7,6 +7,11 @@ import FormTextArea from "@/components/ui/FormTextArea";
 import { useCreateTestimonialMutation } from "@/redux/features/testimonial/testimonialApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Add Feedback",
+};
 
 const AddFeedBack = () => {
   const { data: session } = useSession();
