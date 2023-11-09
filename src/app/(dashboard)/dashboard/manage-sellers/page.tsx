@@ -11,9 +11,6 @@ import toast from "react-hot-toast";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Manage Sellers",
-};
 
 const ManageSellersPage = () => {
   const { data: session } = useSession();

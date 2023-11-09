@@ -6,9 +6,7 @@ import React from "react";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-};
+
 
 const ConatctUsPage = () => {
   const handleSubmit = (values: any) => {

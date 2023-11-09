@@ -2,9 +2,6 @@ import Container from "@/components/ui/Container";
 import React from "react";
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Billing Address",
-};
 const BillingAddress = () => {
   return <div className="h-screen">In Future We will update this page</div>;
   // return (

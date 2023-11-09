@@ -11,10 +11,6 @@ import Image from "next/image";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Service Details",
-};
-
 const BuyerPage = ({
   params,
 }: {

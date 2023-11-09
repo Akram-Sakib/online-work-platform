@@ -15,10 +15,6 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Manage Reviews",
-};
-
 const ManageReviews = () => {
   const { data: session } = useSession();
   const role = (session as any)?.role;

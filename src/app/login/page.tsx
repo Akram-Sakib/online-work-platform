@@ -7,9 +7,7 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Login",
-};
+
 const LoginPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");

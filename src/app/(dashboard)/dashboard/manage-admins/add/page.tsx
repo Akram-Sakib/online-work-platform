@@ -10,9 +10,7 @@ import toast from "react-hot-toast";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Add Admin",
-};
+
 
 const CreateAdminPage = () => {
   const { data: session } = useSession();

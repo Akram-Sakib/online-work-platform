@@ -18,9 +18,6 @@ import toast from "react-hot-toast";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Edit Admin",
-};
 
 type IEditAdminPageProps = {
   params: any;

@@ -14,9 +14,6 @@ import toast from "react-hot-toast";
 
 import { Metadata } from "next/types";
 
-export const metadata: Metadata = {
-  title: "Create Task",
-};
 
 const CreateAdminPage = () => {
   const { data: session } = useSession();
