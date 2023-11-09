@@ -67,7 +67,10 @@ const Navbar = () => {
           {!isLoading && data?.name ? (
             <>
               {!data.avatarUrl && data.name && (
-                <button onClick={logout} className="btn-xs text-xs">
+                <button
+                  onClick={logout}
+                  className="btn-sm text-sm text-bold hidden md:block"
+                >
                   Logout
                 </button>
               )}
