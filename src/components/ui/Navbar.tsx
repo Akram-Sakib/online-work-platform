@@ -44,7 +44,11 @@ const Navbar = () => {
               <li>
                 <Link href={"/contact-us"}>Contact Us</Link>
               </li>
-              {!isLoading && data?.name && <li>Logout</li>}
+              {!isLoading && data?.name && (
+                <li className="cursor-pointer" onClick={logout}>
+                  <span>Logout</span>
+                </li>
+              )}
             </ul>
           </div>
           <Link href={"/"}>
@@ -63,7 +67,9 @@ const Navbar = () => {
           {!isLoading && data?.name ? (
             <>
               {!data.avatarUrl && data.name && (
-                <Button className="btn-xs text-xs">Logout</Button>
+                <button onClick={logout} className="btn-xs text-xs">
+                  Logout
+                </button>
               )}
               {data.avatarUrl && (
                 <details className="dropdown">
