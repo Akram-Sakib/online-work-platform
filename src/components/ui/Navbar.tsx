@@ -44,12 +44,11 @@ const Navbar = () => {
               <li>
                 <Link href={"/contact-us"}>Contact Us</Link>
               </li>
-              {!isLoading && data?.name ? <li>Logout</li> : null}
+              {!isLoading && data?.name && <li>Logout</li>}
             </ul>
           </div>
           <Link href={"/"}>
             <Image src={logo} width={300} height={50} alt="logo" />
-            {/* <label htmlFor="">DO MY WORKS</label> */}
           </Link>
         </div>
         <div className="navbar-end gap-x-5">
