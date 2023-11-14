@@ -21,7 +21,7 @@ const HomepageBanner = () => {
     content = data?.data?.map((item) => (
       <span
         key={item.id}
-        className="inline-block mr-3 border border-white px-3 rounded-full py-1 text-sm"
+        className="inline-block mr-3 border border-white px-3 rounded-full py-1 text-sm mb-3"
       >
         {item.name}
       </span>
