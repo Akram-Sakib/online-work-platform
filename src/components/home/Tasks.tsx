@@ -17,14 +17,17 @@ const Tasks = () => {
   if (!isLoading && isError) content = <div>Something went wrong</div>;
   if (!isLoading && !isError && data && data?.data?.length > 0) {
     content = data?.data?.map((task, index) => {
+      const taskReviewsLength = (task as any)?.taskReviews?.length;
+      const taskReviewsSum = (task as any)?.taskReviews?.reduce(
+        (acc: any, curr: Record<string, any>) => {
+          return acc + curr.rating.toString();
+        },
+        0
+      );
+
       const avgRating =
-        (task as any)?.taskReviews?.length > 0
-          ? (task as any)?.taskReviews?.reduce(
-              (acc: any, curr: Record<string, any>) => {
-                return acc + curr.rating.toString();
-              },
-              0
-            ) / (task as any)?.taskReviews?.length
+        taskReviewsLength > 0
+          ? Math.ceil(taskReviewsSum / taskReviewsLength)
           : 0;
 
       return (
