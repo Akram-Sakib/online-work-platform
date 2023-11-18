@@ -5,10 +5,12 @@ import { useProfileQuery } from "@/redux/features/profile/profileApi";
 import logo from "@/assets/svg/logo-white-text.svg";
 import { logout } from "@/lib/authOptions";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
+// import {  Link } from "nextjs13-progress";
+
 import Container from "./Container";
 import "./Navbar.css";
-import Button from "./Button";
+import { Link } from "@/lib/router-events";
 
 const Navbar = () => {
   const { data, isLoading } = useProfileQuery(undefined);

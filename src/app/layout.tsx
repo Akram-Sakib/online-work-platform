@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/Providers";
+import Next13NProgress from "@/components/loadingprogress/Next13NProgress";
+// import { Next13NProgress } from "nextjs13-progress";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <body className={inter.className}>
+        <Next13NProgress color="#570DF8" height={5} />
         <Providers session={session}>{children}</Providers>
       </body>
     </html>

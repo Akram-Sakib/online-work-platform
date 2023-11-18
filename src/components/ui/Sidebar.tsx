@@ -1,8 +1,8 @@
 "use client";
 
 import { sideBarMenu } from "@/constants/sidebarMenu";
+import { Link } from "@/lib/router-events";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useState } from "react";
 
 const Sidebar = () => {

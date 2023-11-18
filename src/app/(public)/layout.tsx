@@ -4,10 +4,10 @@ import LocalStorageProvider from "@/lib/LocalStorageProviders";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import React from "react";
+import { Next13NProgress } from "nextjs13-progress";
 
 const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
   const session: any = await getServerSession(authOptions);
-
 
   return (
     <LocalStorageProvider accessToken={session?.accessToken}>

@@ -7,3 +7,7 @@
 * {
   scroll-behavior: smooth;
 }
+
+#nprogress .spinner {
+  display: hidden !important;
+}
