@@ -1,18 +1,18 @@
 "use client";
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
-import React from "react";
-import { useSession } from "next-auth/react";
+import Button from "@/components/ui/Button";
 import Form from "@/components/ui/Form";
 import FormInput from "@/components/ui/FormInput";
 import { useAddCategoryMutation } from "@/redux/features/categories/categoriesApi";
+import { categoriesSchema } from "@/schemas/categories";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-import Button from "@/components/ui/Button";
-import { Metadata } from "next/types";
 
 const AddCategory = () => {
   const { data: session } = useSession();
-  const role = (session as any)?.role;
+  // const role = (session as any)?.role;
   const items = [
     {
       name: "Dashboard",
@@ -39,7 +39,10 @@ const AddCategory = () => {
     <section className="p-5">
       <BreadCrumb items={items} />
       <h1 className="my-5 text-2xl font-semibold">Add New Category</h1>
-      <Form submitHandler={handleSubmit}>
+      <Form
+        resolver={yupResolver(categoriesSchema)}
+        submitHandler={handleSubmit}
+      >
         <FormInput
           name="name"
           required={true}

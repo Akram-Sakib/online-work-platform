@@ -5,26 +5,24 @@ import ServiceDetailsSidebar from "@/components/services/ServiceDetailsSidebar";
 import ServiceReviews from "@/components/services/ServiceReviews";
 import Container from "@/components/ui/Container";
 import PageLoading from "@/components/ui/PageLoading";
-import { useTaskQuery } from "@/redux/features/tasks/tasksApi";
+import { useTaskBySlugQuery } from "@/redux/features/tasks/tasksApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-
-import { Metadata } from "next/types";
 
 const BuyerPage = ({
   params,
 }: {
   params: {
-    id: string;
+    slug: string;
   };
 }) => {
-  const id = params.id;
+  const slug = params.slug;
 
   const { data: session } = useSession();
   const role = (session as any)?.role;
   const userId = (session as any)?.userId;
 
-  const { data, isLoading, isError } = useTaskQuery(id);
+  const { data, isLoading, isError } = useTaskBySlugQuery(slug);
 
   let content = null;
   if (isLoading) return <PageLoading />;
@@ -45,7 +43,8 @@ const BuyerPage = ({
     taskReviews,
     sellerId,
   } = data || {};
-
+  console.log("data", data);
+  
   const isBuyerReviewed =
     taskReviews &&
     taskReviews?.length > 0 &&
@@ -62,15 +61,9 @@ const BuyerPage = ({
             height={500}
             className="mb-5"
           />
-          <h2 className="text-3xl mb-5">{data?.title}</h2>
-          <p>
-            {description} Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Ipsum facilis eos tenetur saepe repellendus sunt ducimus
-            tempora, dolorem itaque? Dicta, iste sit. Dolorem doloremque nihil
-            quidem tenetur qui. Enim, rem reiciendis at eius asperiores earum
-            distinctio, aut, optio incidunt voluptas quidem vitae corrupti omnis
-            quaerat nemo nobis eveniet voluptatum? Quisquam ducimus voluptatem
-            mollitia temporibus consequuntur aperiam quam? Neque, hic quia.
+          <h2 className="text-2xl mb-5 text-white">{data?.title}</h2>
+          <p className="text-base">
+            {description}
           </p>
           <div>
             {taskReviews && taskReviews?.length > 0 && (

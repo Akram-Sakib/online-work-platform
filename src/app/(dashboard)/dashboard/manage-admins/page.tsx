@@ -1,14 +1,13 @@
 "use client";
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { Link } from "@/lib/router-events";
 import { useAdminsQuery } from "@/redux/features/admin/adminApi";
 import { useDeleteUserMutation } from "@/redux/features/auth/authApi";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import toast from "react-hot-toast";
-import { Metadata } from "next/types";
 
 
 const ManageAdminsPage = () => {

@@ -12,9 +12,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useRef, useState } from "react";
+import "./Testimonials.css";
 
 const Testimonials = () => {
-  const { data, isLoading, isError } = useTestmonialsQuery(undefined);
+  const { data, isLoading, isError } = useTestmonialsQuery("");
   const [_, setInit] = useState<boolean>(false);
 
   const prevRef = useRef(null);
@@ -42,20 +43,32 @@ const Testimonials = () => {
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           pagination={{
             clickable: true,
-            renderBullet: function (index, className) {
+            el: ".swiper-testimonials-pagination",
+             renderBullet: (index, className) => {
               return (
-                '<span class="mt-10 ' +
+                '<span class="mt-80 ' +
                 className +
                 '"><img class="pagination-bullet bg-white w-3 h-2 rounded-full"/></span>'
               );
             },
           }}
+          // pagination={{
+          //   clickable: true,
+          //   renderBullet: (index, className) => {
+          //     return (
+          //       '<span class="mt-80 ' +
+          //       className +
+          //       '"><img class="pagination-bullet bg-white w-3 h-2 rounded-full"/></span>'
+          //     );
+          //   },
+          // }}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
           scrollbar={{ draggable: true }}
           onInit={() => setInit(true)}
+          centeredSlides={true}
           className="w-full"
           breakpoints={
             {
@@ -63,11 +76,13 @@ const Testimonials = () => {
               0: {
                 slidesPerView: 1,
                 spaceBetween: 20,
+                centeredSlides: true,
               },
               // when window width is >= 768px
               768: {
                 slidesPerView: 2,
                 spaceBetween: 40,
+                centeredSlides: true,
               },
               // when window width is >= 1200px
               1200: {
@@ -93,7 +108,7 @@ const Testimonials = () => {
             return (
               <SwiperSlide key={testimonial.id}>
                 <div
-                  className="p-5 border border-gray-500 rounded-2xl max-w-sm"
+                  className="p-5 border border-gray-500 rounded-2xl md:max-w-sm"
                   data-aos="fade-up"
                   data-aos-easing="ease-in-back"
                   data-aos-delay={index * 100}
@@ -124,6 +139,7 @@ const Testimonials = () => {
             );
           })}
         </Swiper>
+
         <button ref={nextRef}>
           <FaChevronRight />
         </button>
@@ -150,7 +166,8 @@ const Testimonials = () => {
         >
           Here’s what students say about us.
         </p>
-        {content}
+        {content}{" "}
+        <div className="swiper-testimonials-pagination flex justify-center h-5 w-5 mt-10" />
       </Container>
     </section>
   );

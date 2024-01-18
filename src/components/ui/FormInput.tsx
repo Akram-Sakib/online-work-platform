@@ -61,7 +61,8 @@ const FormInput = ({
             readOnly={readonly}
             className={cn("input input-bordered w-full max-w-xs", className)}
             {...field}
-            value={value ? value : field.value}
+            value={field.value ? field.value : ""}
+            defaultValue={field.value}
           />
         )}
       />

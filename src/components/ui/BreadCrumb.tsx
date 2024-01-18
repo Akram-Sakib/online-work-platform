@@ -1,5 +1,5 @@
+import { Link } from "@/lib/router-events";
 import React from "react";
-import Link from "next/link";
 
 const BreadCrumb = ({
   items,

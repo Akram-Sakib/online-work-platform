@@ -6,6 +6,7 @@ import Form from "../ui/Form";
 import { useAddOrderMutation } from "@/redux/features/order/orderApi";
 import Button from "../ui/Button";
 import toast from "react-hot-toast";
+import { useRouter } from "@/lib/router-events";
 
 const ServiceDetailsSidebar = ({
   price,
@@ -17,7 +18,7 @@ const ServiceDetailsSidebar = ({
   sellerId?: string;
 }) => {
   const [order] = useAddOrderMutation();
-
+  const router = useRouter();
   const orderItem = [
     {
       taskId,
@@ -26,14 +27,15 @@ const ServiceDetailsSidebar = ({
       price,
     },
   ];
-  
+
   const handleSubmit = async (data: any) => {
-    try {
-      await order({ orderItem }).unwrap();
-      toast.success("Order has been placed successfully");
-    } catch (error) {
-      toast.error("Something went wrong");
-    }
+    router.push("/checkout");
+    // try {
+    //   await order({ orderItem }).unwrap();
+    //   toast.success("Order has been placed successfully");
+    // } catch (error) {
+    //   toast.error("Something went wrong");
+    // }
   };
 
   return (
@@ -63,7 +65,7 @@ const ServiceDetailsSidebar = ({
           className="max-w-full"
           required={true}
         />
-        <Button className="mt-10">Proceed To Order</Button>
+        <Button className="mt-10">Proceed To Checkout</Button>
       </Form>
     </StickyBox>
   );

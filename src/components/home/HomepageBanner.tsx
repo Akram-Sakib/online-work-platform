@@ -3,10 +3,12 @@
 import { useCategoriesQuery } from "@/redux/features/categories/categoriesApi";
 import { setSearch } from "@/redux/features/filter/filterSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import Lottie from "lottie-react";
-import Link from "next/link";
 import Container from "../ui/Container";
 import ExpertAnimation from "@/lottieAnimation/ExpertAnimation.json";
+import dynamic from "next/dynamic";
+import { Link } from "@/lib/router-events";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const HomepageBanner = () => {
   const { data, isLoading, isError } = useCategoriesQuery(undefined);

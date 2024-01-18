@@ -7,6 +7,11 @@ import Tasks from "@/components/home/Tasks";
 import Testimonials from "@/components/home/Testimonials";
 import TopExperts from "@/components/home/TopExperts";
 import TroubleSolution from "@/components/home/TroubleSolution";
+// import BuyerMap from "@/components/map/BuyerMap";
+// import dynamic from "next/dynamic";
+// const BuyerMap = dynamic(() => import("@/components/map/BuyerMap"), {
+//   ssr: false,
+// });
 
 const HomePage = async () => {
   return (

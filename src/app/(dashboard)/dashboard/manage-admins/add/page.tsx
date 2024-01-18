@@ -7,10 +7,8 @@ import FormInput from "@/components/ui/FormInput";
 import { useRegisterAdminMutation } from "@/redux/features/auth/authApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-
-import { Metadata } from "next/types";
-
-
+import { registerSchema } from "@/schemas/register";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const CreateAdminPage = () => {
   const { data: session } = useSession();
@@ -47,7 +45,10 @@ const CreateAdminPage = () => {
     <section className="p-5">
       <BreadCrumb items={items} />
       <h1 className="my-5 text-2xl font-semibold">Add New Admin</h1>
-      <Form submitHandler={handleSubmit}>
+      <Form
+        resolver={yupResolver(registerSchema("admin"))}
+        submitHandler={handleSubmit}
+      >
         <FormInput
           name="admin.name"
           required={true}

@@ -5,11 +5,16 @@ type BtnProps = {
   children: React.ReactNode;
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
-const Button = ({ children, className, ...props }: BtnProps) => {
+const Button: React.FC<BtnProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <button {...props} className={cn(`btn btn-primary w-full mt-5`, className)}>
+    <button {...props} className={cn(`btn btn-primary w-full mt-5 text-white`, className)}>
       {children}
     </button>
   );

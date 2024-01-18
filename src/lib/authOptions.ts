@@ -1,10 +1,13 @@
+import { ACCESS_TOKEN_KEY } from "@/constants/storageKey";
+import { envConfig } from "@/helpers/config/envConfig";
 import { jwtHelpers } from "@/helpers/jwthelpers/jwthelpers";
+import { removeFromCookie, setToCookie } from "@/services/actions";
 import { getNewAccessToken, login } from "@/services/auth.services";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { removeFromLocalStorage } from "@/utils/local-storage";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { signOut } from "next-auth/react";
-import { AUTH_KEY } from "@/constants/storageKey";
 
 export const authOptions: NextAuthOptions = {
   // Secret for Next-auth, without this JWT encryption/decryption won't work
@@ -30,6 +33,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         const data = result?.data;
+
         const message = (result as any)?.message;
 
         const verifiedToken: any = jwtHelpers.verifyToken(
@@ -48,18 +52,63 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_APP_CLIENT_ID as string,
-    //   clientSecret: process.env.GITHUB_APP_CLIENT_SECRET as string,
-    // }),
+    GoogleProvider({
+      id: "googleA",
+      clientId: envConfig.google.client_id!,
+      clientSecret: envConfig.google.client_secret!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
+    GoogleProvider({
+      id: "googleB",
+      clientId: envConfig.google.client_id!,
+      clientSecret: envConfig.google.client_secret!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
+    GitHubProvider({
+      id: "github-1",
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+      clientId: envConfig.github.client_id!,
+      clientSecret: envConfig.github.client_secret!,
+    }),
+    GitHubProvider({
+      id: "github-2",
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+      clientId: envConfig.github.client_id!,
+      clientSecret: envConfig.github.client_secret!,
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       // console.log(token, "token auth option")
       // console.log(user, "user auth option")
       return {
         ...token,
         ...user,
+        ...account,
       };
     },
     async session({ session, token }: { session: any; token: any }) {
@@ -67,12 +116,18 @@ export const authOptions: NextAuthOptions = {
         token?.accessToken,
         process.env.JWT_SECRET!
       );
+
       if (!verifiedToken) {
         const { data }: Record<string, any> = await getNewAccessToken(
           token?.accessToken
         );
+
+        console.log("New token generated", data);
         token.accessToken = data?.accessToken;
       }
+
+      setToCookie(ACCESS_TOKEN_KEY, token?.accessToken);
+
       return {
         ...session,
         ...token,
@@ -94,5 +149,5 @@ export const authOptions: NextAuthOptions = {
 
 export const logout = () => {
   signOut();
-  removeFromLocalStorage(AUTH_KEY);
+  removeFromCookie(ACCESS_TOKEN_KEY);
 };

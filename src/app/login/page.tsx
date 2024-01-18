@@ -1,21 +1,22 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-hot-toast";
-import { Metadata } from "next/types";
-
+import Form from "@/components/ui/Form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "@/schemas/login";
+import FormInput from "@/components/ui/FormInput";
+import Button from "@/components/ui/Button";
+import { Link } from "@/lib/router-events";
 
 const LoginPage = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (values: any) => {
+    const { email, password } = values;
     const login = await signIn("my-app-credentials", {
       email,
       password,
@@ -40,63 +41,53 @@ const LoginPage = () => {
             If you are already a member, easily log in
           </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
+          <Form
+            resolver={yupResolver(loginSchema)}
+            submitHandler={handleSubmit}
+            className="flex flex-col gap-4"
+          >
+            <FormInput
               className="p-2 mt-8 rounded-xl border"
               type="email"
               name="email"
               placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
             />
             <div className="relative">
-              <input
+              <FormInput
                 className="p-2 rounded-xl border w-full"
                 type="password"
                 name="password"
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">
-              Login
-            </button>
-          </form>
+
+            <Button
+              type="submit"
+              className="bg-[#002D74] disabled:bg-[#002D70] rounded-xl text-white py-2 hover:scale-105 duration-300"
+              disabled={status === "loading"}
+            >
+              {status !== "loading" ? (
+                <span>Login</span>
+              ) : (
+                <svg
+                  className="animate-spin w-4 h-4 fill-white"
+                  viewBox="3 3 18 18"
+                >
+                  <path
+                    className="opacity-20"
+                    d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"
+                  ></path>
+                  <path d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                </svg>
+              )}
+            </Button>
+          </Form>
 
           <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
             <hr className="border-gray-400" />
             <p className="text-center text-sm">OR</p>
             <hr className="border-gray-400" />
           </div>
-
-          {/* <button
-            type="submit"
-            className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]"
-          >
-            <svg
-              className="mr-3"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 48 48"
-              width="25px"
-            >
-              <path
-                fill="#FFC107"
-                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-              />
-              <path
-                fill="#FF3D00"
-                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-              />
-              <path
-                fill="#4CAF50"
-                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-              />
-              <path
-                fill="#1976D2"
-                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-              />
-            </svg>
-            Login with Google
-          </button> */}
 
           <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
             <a href="#">Forgot your password?</a>

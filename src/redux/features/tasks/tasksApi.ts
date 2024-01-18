@@ -30,6 +30,13 @@ const tasksApi = apiSlice.injectEndpoints({
       }),
       providesTags: [tagTypes.task],
     }),
+    taskBySlug: builder.query<Task, string>({
+      query: (slug) => ({
+        url: `${TASK_URL}/${slug}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.task],
+    }),
     taskUpdate: builder.mutation<Task, { formData: FormData; id: string }>({
       query: ({ formData, id }) => {
         return {
@@ -57,4 +64,5 @@ export const {
   useTaskUpdateMutation,
   useCreateTaskMutation,
   useTaskDeleteMutation,
+  useTaskBySlugQuery,
 } = tasksApi;

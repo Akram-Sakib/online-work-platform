@@ -6,16 +6,16 @@ import Form from "@/components/ui/Form";
 import FormImageUpload from "@/components/ui/FormImageUpload";
 import FormInput from "@/components/ui/FormInput";
 import FormSelect, { SelectOptions } from "@/components/ui/FormSelect";
+import FormTextArea from "@/components/ui/FormTextArea";
 import { useCategoriesQuery } from "@/redux/features/categories/categoriesApi";
 import { useProfileQuery } from "@/redux/features/profile/profileApi";
 import { useCreateTaskMutation } from "@/redux/features/tasks/tasksApi";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-import { Metadata } from "next/types";
+const CreateTaskPage = () => {
 
 
-const CreateAdminPage = () => {
   const { data: session } = useSession();
   const role = (session as any)?.role;
   const items = [
@@ -88,11 +88,17 @@ const CreateAdminPage = () => {
           required={true}
           className="text-white max-w-full"
         />
-        <FormInput
+        <FormTextArea
           name="description"
           required={true}
           label="Description"
           placeholder="Enter your task description here"
+          className="text-white max-w-full h-32"
+        />
+        <FormInput
+          name="slug"
+          label="Slug"
+          placeholder="Enter your task slug here"
           className="text-white max-w-full"
         />
         <FormInput
@@ -117,4 +123,4 @@ const CreateAdminPage = () => {
   );
 };
 
-export default CreateAdminPage;
+export default CreateTaskPage;

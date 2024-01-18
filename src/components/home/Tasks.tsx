@@ -2,10 +2,10 @@
 
 import { useTasksQuery } from "@/redux/features/tasks/tasksApi";
 import { useAppSelector } from "@/redux/hooks";
-import Image from "next/image";
-import Link from "next/link";
 import Button from "../ui/Button";
 import Container from "../ui/Container";
+import BlurImage from "../ui/BlurImage";
+import { Link } from "@/lib/router-events";
 
 const Tasks = () => {
   const { search } = useAppSelector((state) => state.filter);
@@ -33,13 +33,13 @@ const Tasks = () => {
       return (
         <div
           key={task.id}
-          data-aos="zoom-in-up"
-          data-aos-easing="ease-in-back"
-          data-aos-delay={`${index * 100}`}
-          data-aos-duration="1000"
-          data-aos-once="true"
+          // data-aos="zoom-in-up"
+          // data-aos-easing="ease-in-back"
+          // data-aos-delay={`${index * 100}`}
+          // data-aos-duration="1000"
+          // data-aos-once="true"
         >
-          <Image
+          <BlurImage
             src={task.imageUrl}
             width={1000}
             height={400}
@@ -64,7 +64,7 @@ const Tasks = () => {
           </div>
           <p className="text-sm mt-3">{task.description}</p>
           <Button className="mb-4">
-            <Link href={`/services/${task.id}`}>Get Service</Link>
+            <Link href={`/services/${task.slug}`}>Get Service</Link>
           </Button>
         </div>
       );

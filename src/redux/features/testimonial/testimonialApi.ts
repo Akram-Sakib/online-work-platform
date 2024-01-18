@@ -7,9 +7,9 @@ const TESTIMONIAL_URL = "/testimonials";
 
 const testimonialApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    testmonials: builder.query<IGenericResponse<Testimonial[]>, void>({
-      query: () => ({
-        url: `${TESTIMONIAL_URL}`,
+    testmonials: builder.query<IGenericResponse<Testimonial[]>, string>({
+      query: (query = "") => ({
+        url: `${TESTIMONIAL_URL}/${query}`,
         method: "GET",
       }),
       providesTags: [tagTypes.testimonial],

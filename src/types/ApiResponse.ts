@@ -76,6 +76,7 @@ export type Task = {
   imageUrl: string;
   title: string;
   sellerId: string;
+  slug: string;
   price: string;
   description: string;
   categoryId: string;

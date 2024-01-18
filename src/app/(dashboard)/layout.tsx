@@ -6,15 +6,14 @@ import { getServerSession } from "next-auth";
 import React from "react";
 
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session: any = await getServerSession(authOptions);
 
   return (
-    <LocalStorageProvider accessToken={session?.accessToken}>
+    <>
       <Sidebar />
       <AdminContent>
         <h3 className="text-black">{children}</h3>
       </AdminContent>
-    </LocalStorageProvider>
+    </>
   );
 };
 

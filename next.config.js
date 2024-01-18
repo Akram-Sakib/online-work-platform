@@ -8,9 +8,9 @@ const withPWA = require("next-pwa")({
 });
 
 const nextConfig = withPWA({
-  experimental: {
-    serverActions: true,
-  },
+  // experimental: {
+  //   serverActions: true,
+  // },
   images: {
     domains: ["res.cloudinary.com", "daisyui.com"],
   },

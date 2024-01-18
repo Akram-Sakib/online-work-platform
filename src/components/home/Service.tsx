@@ -1,15 +1,15 @@
 "use client";
 
-import React from "react";
-import Container from "../ui/Container";
-import imgPaperSection from "../../assets/images/img_paper-section-top.webp";
-import Image from "next/image";
-import Button from "../ui/Button";
+import { RemainingDays } from "@/constants/globals";
 import { useCategoriesQuery } from "@/redux/features/categories/categoriesApi";
+import { useAppSelector } from "@/redux/hooks";
+import imgPaperSection from "../../assets/images/img_paper-section-top.webp";
+import BlurImage from "../ui/BlurImage";
+import Button from "../ui/Button";
+import Container from "../ui/Container";
 import Form from "../ui/Form";
 import FormSelect from "../ui/FormSelect";
-import { RemainingDays } from "@/constants/globals";
-import { useAppSelector } from "@/redux/hooks";
+
 const Service = () => {
   const { data, isLoading, isError } = useCategoriesQuery(undefined);
   const { task } = useAppSelector((state) => state.tasks);
@@ -76,7 +76,7 @@ const Service = () => {
             <li>3. Stay in touch with your expert.</li>
             <li>4. Download the finished work.</li>
           </ul>
-          <Image
+          <BlurImage
             src={imgPaperSection}
             alt="Paper Section"
             height={100}

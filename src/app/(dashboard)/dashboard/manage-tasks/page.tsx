@@ -9,9 +9,9 @@ import {
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import toast from "react-hot-toast";
 import { Metadata } from "next/types";
+import { Link } from "@/lib/router-events";
 
 
 const ManageTasksPage = () => {

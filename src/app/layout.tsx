@@ -4,7 +4,6 @@ import "./globals.css";
 import Providers from "@/lib/Providers";
 import Next13NProgress from "@/components/loadingprogress/Next13NProgress";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

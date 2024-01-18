@@ -27,5 +27,6 @@ export const login = async (credentials: {
     }),
     withCredentials: true,
   });
+
   return result;
 };

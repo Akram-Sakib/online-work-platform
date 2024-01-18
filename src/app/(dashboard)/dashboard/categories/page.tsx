@@ -1,13 +1,13 @@
 "use client";
 
 import BreadCrumb from "@/components/ui/BreadCrumb";
+import { Link } from "@/lib/router-events";
 import {
   useCategoriesQuery,
   useDeleteCategoryMutation,
 } from "@/redux/features/categories/categoriesApi";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import toast from "react-hot-toast";
 
 

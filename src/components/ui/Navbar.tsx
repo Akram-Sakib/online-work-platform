@@ -5,7 +5,6 @@ import { useProfileQuery } from "@/redux/features/profile/profileApi";
 import logo from "@/assets/svg/logo-white-text.svg";
 import { logout } from "@/lib/authOptions";
 import Image from "next/image";
-// import Link from "next/link";
 // import {  Link } from "nextjs13-progress";
 
 import Container from "./Container";
@@ -48,7 +47,7 @@ const Navbar = () => {
               </li>
               {!isLoading && data?.name && (
                 <li className="cursor-pointer" onClick={logout}>
-                  <span>Logout</span>
+                  <span className="font-bold">Logout</span>
                 </li>
               )}
             </ul>

@@ -1,8 +1,8 @@
-import { AUTH_KEY } from "@/constants/storageKey";
+import { ACCESS_TOKEN_KEY } from "@/constants/storageKey";
+import { getCookie } from "@/services/actions";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
-import { getFromLocalStorage } from "@/utils/local-storage";
-// import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 const instance = axios.create();
 instance.defaults.headers.post["Content-Type"] = "application/json";
@@ -13,9 +13,12 @@ instance.defaults.timeout = 60000;
 instance.interceptors.request.use(
   async function (config) {
     // Do something before request is sent
-    const accessToken = getFromLocalStorage(AUTH_KEY);
-    if (accessToken) {
-      config.headers.Authorization = accessToken;
+    const cookie = (await getCookie(ACCESS_TOKEN_KEY)) as RequestCookie;
+    if (cookie) {
+      const accessToken = cookie.value;
+      if (accessToken) {
+        config.headers.Authorization = accessToken;
+      }
     }
     return config;
   },
@@ -46,3 +49,4 @@ instance.interceptors.response.use(
 );
 
 export { instance };
+
