@@ -40,7 +40,7 @@ const Tasks = () => {
           // data-aos-once="true"
         >
           <BlurImage
-            src={task.imageUrl}
+            src={task?.imageUrl}
             width={1000}
             height={400}
             layout="responsive"
