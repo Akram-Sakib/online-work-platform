@@ -34,7 +34,7 @@ const ManageReviews = () => {
       toast.error("Something went wrong");
     }
   };
-
+  //@ts-ignore
   const { data, isLoading, isError } = useTestmonialsQuery(undefined);
   // decide what to render
 
