@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "Assignment Complete",
-    "short_name": "Assignment Complete",
+    "name": "Online Work Platform",
+    "short_name": "Online Work Platform",
     "description": "Complete your assignment from nearest Seller",
     "icons": [
         {

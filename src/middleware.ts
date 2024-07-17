@@ -40,26 +40,26 @@ export async function middleware(request: NextRequest) {
   const isBuyer = role === "buyer";
   const isSuperAdmin = role === "super_admin";
 
-  if (!isSuperAdmin && excludePathsForAdminBuyerAndSeller.includes(pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
+  // if (!isSuperAdmin && excludePathsForAdminBuyerAndSeller.includes(pathname)) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  // }
 
-  if (isBuyer && excludePathsForBuyer.includes(pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
+  // if (isBuyer && excludePathsForBuyer.includes(pathname)) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  // }
 
-  if (
-    (isSeller || isBuyer) &&
-    excludePathsForBuyerAndSeller.includes(pathname)
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
-  }
+  // if (
+  //   (isSeller || isBuyer) &&
+  //   excludePathsForBuyerAndSeller.includes(pathname)
+  // ) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  // }
 
-  if (!token && request.nextUrl.pathname !== "/login" && !publicPaths.includes(pathname)) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
-  } else if (token && request.nextUrl.pathname === "/login") {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
-  }
+  // if (!token && request.nextUrl.pathname !== "/login" && !publicPaths.includes(pathname)) {
+  //   return NextResponse.redirect(new URL("/login", request.nextUrl));
+  // } else if (token && request.nextUrl.pathname === "/login") {
+  //   return NextResponse.redirect(new URL("/", request.nextUrl));
+  // }
 
   return NextResponse.next();
 }
