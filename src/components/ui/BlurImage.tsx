@@ -3,7 +3,7 @@ import { StaticImageData } from "next/image";
 import { useState } from "react";
 
 interface BlurImageProps {
-  src: StaticImageData;
+  src: StaticImageData | string;
   alt: string;
   className?: string;
   [x: string]: any;
